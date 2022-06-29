@@ -19,9 +19,8 @@ public class SerializableVehiclePart implements Configurable<SerializableVehicle
     protected String name;
     protected int modelData;
 
-    protected double x;
-    protected double y;
-    protected double z;
+    protected SerializableLocation location;
+    protected SerializableRotation rotation;
 
     protected List<VehiclePart> children = new ArrayList<>();
 

@@ -29,7 +29,7 @@ public class VehicleManager {
             oldLocations.put(vehicle.getName(), vehicle.getSpawnLocation());
             vehicle.remove();
         });
-        VehiclesConfig.VEHICLES.forEach(vehicle -> vehicle.spawn(oldLocations.get(vehicle.getName())));
+        VehiclesConfig.VEHICLES.forEach(vehicle -> spawnVehicle(vehicle.getName(), oldLocations.get(vehicle.getName())));
     }
 
     @Nullable

@@ -14,8 +14,14 @@ public class VehiclesConfig {
     @ConfigPath("vehicles")
     public static List<Vehicle> VEHICLES = List.of(
         new Vehicle("tank", List.of(
-            new VehiclePart("body", 101, 0, 0, 0, Collections.emptyList()),
-            new VehiclePart("head", 102, 0, 0, 0, Collections.emptyList())
+            new VehiclePart("body", 101,
+                new SerializableLocation(0, 0, 0),
+                new SerializableRotation(0, 0, 0),
+                Collections.emptyList()),
+            new VehiclePart("head", 102,
+                new SerializableLocation(0, 0, 0),
+                new SerializableRotation(0, 0, 0),
+                Collections.emptyList())
         ))
     );
 }

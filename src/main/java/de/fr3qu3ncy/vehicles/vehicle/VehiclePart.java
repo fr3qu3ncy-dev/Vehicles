@@ -1,5 +1,7 @@
 package de.fr3qu3ncy.vehicles.vehicle;
 
+import de.fr3qu3ncy.vehicles.configuration.SerializableLocation;
+import de.fr3qu3ncy.vehicles.configuration.SerializableRotation;
 import de.fr3qu3ncy.vehicles.configuration.SerializableVehiclePart;
 import de.fr3qu3ncy.vehicles.util.ItemUtils;
 import lombok.Getter;
@@ -15,12 +17,16 @@ public class VehiclePart extends SerializableVehiclePart {
 
     private Entity entity;
 
-    public VehiclePart(String name, int modelData, double x, double y, double z, List<VehiclePart> children) {
-        super(name, modelData, x, y, z, children);
+    public VehiclePart(String name, int modelData,
+                       SerializableLocation location,
+                       SerializableRotation rotation,
+                       List<VehiclePart> children) {
+        super(name, modelData, location, rotation, children);
     }
 
     public void spawn(Location location) {
-        this.entity = ItemUtils.spawnArmorStand(location.clone().add(x, y, z), modelData);
+        location = location.clone().add(getLocation().toBukkitLocation(location.getWorld()).toVector());
+        this.entity = ItemUtils.spawnArmorStand(location, getRotation(), modelData);
     }
 
     public void remove() {
