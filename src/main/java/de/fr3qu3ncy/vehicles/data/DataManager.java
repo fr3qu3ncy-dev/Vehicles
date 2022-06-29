@@ -1,7 +1,9 @@
 package de.fr3qu3ncy.vehicles.data;
 
 import de.fr3qu3ncy.easyconfig.EasyConfig;
-import de.fr3qu3ncy.easyconfig.register.ConfigRegister;
+import de.fr3qu3ncy.easyconfig.register.ConfigRegistry;
+import de.fr3qu3ncy.vehicles.configuration.SerializableLocation;
+import de.fr3qu3ncy.vehicles.configuration.SerializableRotation;
 import de.fr3qu3ncy.vehicles.configuration.VehiclesConfig;
 import de.fr3qu3ncy.vehicles.vehicle.Vehicle;
 import de.fr3qu3ncy.vehicles.vehicle.VehiclePart;
@@ -21,7 +23,10 @@ public class DataManager {
     }
 
     private void registerSerializers() {
-        ConfigRegister.register(Vehicle.class);
-        ConfigRegister.register(VehiclePart.class);
+        ConfigRegistry.register(Vehicle.class);
+        ConfigRegistry.register(VehiclePart.class);
+
+        ConfigRegistry.register(SerializableLocation.class);
+        ConfigRegistry.register(SerializableRotation.class);
     }
 }
