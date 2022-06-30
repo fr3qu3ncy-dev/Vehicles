@@ -1,6 +1,7 @@
 package de.fr3qu3ncy.vehicles.configuration;
 
 import de.fr3qu3ncy.easyconfig.annotation.ConfigurableField;
+import de.fr3qu3ncy.easyconfig.annotation.VariableType;
 import de.fr3qu3ncy.easyconfig.serialization.Configurable;
 import de.fr3qu3ncy.vehicles.vehicle.VehiclePart;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,8 @@ import java.util.List;
 public class SerializableVehicle implements Configurable<SerializableVehicle> {
 
     protected String name;
+
+    @VariableType
     protected List<VehiclePart> parts;
 
 }

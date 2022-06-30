@@ -3,6 +3,7 @@ package de.fr3qu3ncy.vehicles.vehicle;
 import de.fr3qu3ncy.vehicles.configuration.VehiclesConfig;
 import lombok.Getter;
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class VehicleManager {
             oldLocations.put(vehicle.getName(), vehicle.getSpawnLocation());
             vehicle.remove();
         });
-        VehiclesConfig.VEHICLES.forEach(vehicle -> spawnVehicle(vehicle.getName(), oldLocations.get(vehicle.getName())));
+        oldLocations.forEach(this::spawnVehicle);
     }
 
     @Nullable
@@ -38,5 +39,12 @@ public class VehicleManager {
             .filter(vehicle -> vehicle.getName().equalsIgnoreCase(name))
             .findFirst()
             .orElse(null);
+    }
+
+    @Nullable
+    public Vehicle getVehicle(Entity entity) {
+        return activeVehicles.stream()
+            .filter(vehicle -> vehicle.getParts().stream().anyMatch(part -> entity.equals(part.getArmorStand())))
+            .findFirst().orElse(null);
     }
 }

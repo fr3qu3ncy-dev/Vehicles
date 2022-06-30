@@ -1,22 +1,21 @@
 package de.fr3qu3ncy.vehicles.util;
 
-import de.fr3qu3ncy.vehicles.configuration.SerializableRotation;
+import de.fr3qu3ncy.vehicles.configuration.SerializableVector;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.util.EulerAngle;
 
 public class ItemUtils {
 
     private ItemUtils() {}
 
-    public static ArmorStand spawnArmorStand(Location location, SerializableRotation rotation, int customModelData) {
+    public static ArmorStand spawnArmorStand(Location location, SerializableVector rotationOffset, int customModelData) {
         ArmorStand armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
         armorStand.getEquipment().setHelmet(createItem(customModelData));
-        armorStand.setHeadPose(new EulerAngle(rotation.getRotationX(), rotation.getRotationY(), rotation.getRotationZ()));
+        armorStand.setHeadPose(rotationOffset.toEuler());
         armorStand.setInvisible(true);
         armorStand.setGravity(false);
 
@@ -24,7 +23,7 @@ public class ItemUtils {
     }
 
     private static ItemStack createItem(int customModelData) {
-        ItemStack item = new ItemStack(Material.DIAMOND_HOE);
+        ItemStack item = new ItemStack(Material.RABBIT_HIDE);
         ItemMeta meta = item.getItemMeta();
 
         meta.setCustomModelData(customModelData);

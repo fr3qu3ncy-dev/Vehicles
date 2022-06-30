@@ -2,14 +2,14 @@ package de.fr3qu3ncy.vehicles;
 
 import co.aikar.commands.PaperCommandManager;
 import de.fr3qu3ncy.vehicles.command.VehicleCommand;
+import de.fr3qu3ncy.vehicles.configuration.VehiclesConfig;
 import de.fr3qu3ncy.vehicles.data.DataManager;
+import de.fr3qu3ncy.vehicles.vehicle.VehicleInteractListener;
 import de.fr3qu3ncy.vehicles.vehicle.VehicleManager;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class VehiclesPlugin extends JavaPlugin {
-
-    private PaperCommandManager commandManager;
 
     @Getter
     private DataManager dataManager;
@@ -24,12 +24,19 @@ public class VehiclesPlugin extends JavaPlugin {
         this.vehicleManager = new VehicleManager();
 
         registerCommands();
+        registerListeners();
+
+        VehiclesConfig.VEHICLES.forEach(vehicle -> vehicle.getParts().forEach(System.out::println));
     }
 
     private void registerCommands() {
-        this.commandManager = new PaperCommandManager(this);
+        PaperCommandManager commandManager = new PaperCommandManager(this);
 
         commandManager.registerCommand(new VehicleCommand());
+    }
+
+    private void registerListeners() {
+        getServer().getPluginManager().registerEvents(new VehicleInteractListener(), this);
     }
 
     public static VehiclesPlugin getInstance() {
