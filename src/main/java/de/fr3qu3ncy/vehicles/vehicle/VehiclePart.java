@@ -1,6 +1,6 @@
 package de.fr3qu3ncy.vehicles.vehicle;
 
-import de.fr3qu3ncy.vehicles.configuration.SerializableVector;
+import de.fr3qu3ncy.vehicles.configuration.Vector3;
 import de.fr3qu3ncy.vehicles.configuration.SerializableVehiclePart;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,18 +12,18 @@ import java.util.List;
 @Getter
 public class VehiclePart extends SerializableVehiclePart {
 
-    public VehiclePart(String name, int modelData, SerializableVector locationOffset, SerializableVector rotationOffset,
+    public VehiclePart(String name, int modelData, Vector3 locationOffset, Vector3 rotationOffset,
                        PartFunction function, List<VehiclePart> children) {
         super(name, modelData, locationOffset, rotationOffset, function, children);
     }
 
-    public VehiclePart(String name, int modelData, SerializableVector locationOffset, SerializableVector rotationOffset,
+    public VehiclePart(String name, int modelData, Vector3 locationOffset, Vector3 rotationOffset,
                        List<VehiclePart> children) {
         super(name, modelData, locationOffset, rotationOffset, PartFunction.NONE, children);
     }
 
     @Override
-    public void spawn(Location location, SerializableVector rotation) {
+    public void spawn(Location location, Vector3 rotation) {
         super.spawn(location, rotation);
         getChildren().forEach(child -> child.spawn(location, rotation));
     }

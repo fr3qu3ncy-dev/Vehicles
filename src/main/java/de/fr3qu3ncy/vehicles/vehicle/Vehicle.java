@@ -1,6 +1,6 @@
 package de.fr3qu3ncy.vehicles.vehicle;
 
-import de.fr3qu3ncy.vehicles.configuration.SerializableVector;
+import de.fr3qu3ncy.vehicles.configuration.Vector3;
 import de.fr3qu3ncy.vehicles.configuration.SerializableVehicle;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +22,7 @@ public class Vehicle extends SerializableVehicle {
 
     public void spawn(Location location) {
         this.spawnLocation = location;
-        parts.forEach(vehiclePart -> vehiclePart.spawn(location, SerializableVector.ZERO));
+        parts.forEach(vehiclePart -> vehiclePart.spawn(location, Vector3.ZERO));
     }
 
     public void remove() {

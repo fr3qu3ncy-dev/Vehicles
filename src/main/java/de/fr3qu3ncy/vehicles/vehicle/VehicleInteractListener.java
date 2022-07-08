@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 
 public class VehicleInteractListener implements Listener {
 
@@ -23,5 +24,10 @@ public class VehicleInteractListener implements Listener {
                 part.onRightClick(player);
             }
         }
+    }
+
+    @EventHandler
+    public void onMove(PlayerMoveEvent event) {
+        System.out.println(event.getFrom() + " " + event.getTo());
     }
 }

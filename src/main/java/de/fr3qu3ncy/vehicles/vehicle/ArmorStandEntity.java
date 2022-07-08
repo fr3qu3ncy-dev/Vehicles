@@ -3,7 +3,7 @@ package de.fr3qu3ncy.vehicles.vehicle;
 import de.fr3qu3ncy.easyconfig.annotation.ConfigIgnore;
 import de.fr3qu3ncy.easyconfig.annotation.ConfigurableField;
 import de.fr3qu3ncy.easyconfig.serialization.Configurable;
-import de.fr3qu3ncy.vehicles.configuration.SerializableVector;
+import de.fr3qu3ncy.vehicles.configuration.Vector3;
 import de.fr3qu3ncy.vehicles.util.ItemUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,29 +20,40 @@ public abstract class ArmorStandEntity implements Spawnable, Configurable<ArmorS
     protected String name;
     private int modelData;
 
-    protected SerializableVector locationOffset;
-    protected SerializableVector rotationOffset;
+    protected Vector3 locationOffset;
+    protected Vector3 rotationOffset;
 
     @ConfigIgnore
     @Nullable
     @Getter
     protected ArmorStand armorStand;
 
-    protected ArmorStandEntity(String name, int modelData, SerializableVector locationOffset, SerializableVector rotationOffset) {
+    protected ArmorStandEntity(String name, int modelData, Vector3 locationOffset, Vector3 rotationOffset) {
         this.name = name;
         this.modelData = modelData;
         this.locationOffset = locationOffset;
         this.rotationOffset = rotationOffset;
     }
 
-    public void spawn(Location location, SerializableVector rotation) {
+    public void spawn(Location location, Vector3 rotation) {
         Location finalLocation = location.clone().add(locationOffset.getX(), locationOffset.getY(), locationOffset.getZ());
-        SerializableVector finalRotation = new SerializableVector(
+        Vector3 finalRotation = new Vector3(
             rotation.getX() + rotationOffset.getX(),
             rotation.getY() + rotationOffset.getY(),
             rotation.getZ() + rotationOffset.getZ());
 
         this.armorStand = ItemUtils.spawnArmorStand(finalLocation, finalRotation, modelData);
+    }
+
+    public void rotate(Vector3 rotation) {
+        rotationOffset.add(rotation);
+        setRotation(rotationOffset);
+    }
+
+    public void setRotation(Vector3 rotation) {
+        if (armorStand == null) return;
+        this.rotationOffset = rotation;
+        armorStand.setHeadPose(rotation.toEuler());
     }
 
     public void remove() {

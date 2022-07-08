@@ -21,8 +21,8 @@ public class SerializableVehiclePart extends ArmorStandEntity {
     @VariableType
     protected List<VehiclePart> children = new ArrayList<>();
 
-    public SerializableVehiclePart(String name, int modelData, SerializableVector locationOffset,
-                                   SerializableVector rotationOffset, PartFunction function, List<VehiclePart> children) {
+    public SerializableVehiclePart(String name, int modelData, Vector3 locationOffset,
+                                   Vector3 rotationOffset, PartFunction function, List<VehiclePart> children) {
         super(name, modelData, locationOffset, rotationOffset);
         this.function = function;
         this.children = children;

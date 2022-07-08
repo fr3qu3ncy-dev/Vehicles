@@ -1,7 +1,7 @@
 package de.fr3qu3ncy.vehicles.vehicle;
 
 import de.fr3qu3ncy.easyconfig.annotation.ConfigurableField;
-import de.fr3qu3ncy.vehicles.configuration.SerializableVector;
+import de.fr3qu3ncy.vehicles.configuration.Vector3;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.bukkit.entity.Player;
@@ -13,8 +13,8 @@ import java.util.List;
 @Getter
 public class VehicleSeat extends VehiclePart implements Mountable {
 
-    public VehicleSeat(String name, int modelData, SerializableVector locationOffset,
-                       SerializableVector rotationOffset, List<VehiclePart> children) {
+    public VehicleSeat(String name, int modelData, Vector3 locationOffset,
+                       Vector3 rotationOffset, List<VehiclePart> children) {
         super(name, modelData, locationOffset, rotationOffset, PartFunction.SEAT, children);
     }
 

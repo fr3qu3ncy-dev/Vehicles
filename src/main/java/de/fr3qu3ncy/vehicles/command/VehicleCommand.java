@@ -11,6 +11,17 @@ import org.bukkit.entity.Player;
 @CommandAlias("vehicles|v")
 public class VehicleCommand extends BaseCommand {
 
+    @Subcommand("create")
+    public static void onCreate(Player player, String vehicleName) {
+        if (VehiclesPlugin.getInstance().getVehicleManager().getVehicle(vehicleName) != null) {
+            player.sendMessage("§cThis vehicle already exists!");
+            return;
+        }
+
+        VehiclesPlugin.getInstance().getVehicleManager().createVehicle(vehicleName);
+        player.sendMessage("§2Vehicle §f" + vehicleName + " §2has been created!");
+    }
+
     @Subcommand("spawn")
     public static void onSpawn(Player player, String vehicleName) {
         Block targetBlock = player.getTargetBlockExact(50);
@@ -24,7 +35,7 @@ public class VehicleCommand extends BaseCommand {
 
     @Subcommand("reload")
     public static void onReload(Player player) {
-        VehiclesPlugin.getInstance().getDataManager().getVehiclesConfig().reloadConfig();
+        VehiclesPlugin.getInstance().getDataManager().reloadVehicles();
         VehiclesPlugin.getInstance().getVehicleManager().respawnVehicles();
         player.sendMessage("§2Config has been reloaded.");
     }

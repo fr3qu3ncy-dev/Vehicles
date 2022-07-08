@@ -1,6 +1,6 @@
 package de.fr3qu3ncy.vehicles.util;
 
-import de.fr3qu3ncy.vehicles.configuration.SerializableVector;
+import de.fr3qu3ncy.vehicles.configuration.Vector3;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
@@ -12,7 +12,7 @@ public class ItemUtils {
 
     private ItemUtils() {}
 
-    public static ArmorStand spawnArmorStand(Location location, SerializableVector rotationOffset, int customModelData) {
+    public static ArmorStand spawnArmorStand(Location location, Vector3 rotationOffset, int customModelData) {
         ArmorStand armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
         armorStand.getEquipment().setHelmet(createItem(customModelData));
         armorStand.setHeadPose(rotationOffset.toEuler());

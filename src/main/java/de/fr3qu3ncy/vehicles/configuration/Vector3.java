@@ -12,14 +12,21 @@ import org.bukkit.util.EulerAngle;
 @NoArgsConstructor
 @Getter
 @ConfigurableField
-public class SerializableVector implements Configurable<SerializableVector> {
+public class Vector3 implements Configurable<Vector3> {
 
     @ConfigIgnore
-    public static SerializableVector ZERO = new SerializableVector(0, 0, 0);
+    public static Vector3 ZERO = new Vector3(0, 0, 0);
 
     private double x;
     private double y;
     private double z;
+
+    public Vector3 add(Vector3 other) {
+        this.x += other.x;
+        this.y += other.y;
+        this.z += other.z;
+        return this;
+    }
 
     public EulerAngle toEuler() {
         double factor = Math.PI / 180;
